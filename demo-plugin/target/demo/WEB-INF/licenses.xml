@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<l:dependencies xmlns:l='licenses' groupId='io.jenkins.plugins' artifactId='demo' version='1.0-SNAPSHOT'><l:dependency name='TODO Plugin' groupId='io.jenkins.plugins' artifactId='demo' version='1.0-SNAPSHOT' url=''><l:description>The Jenkins Plugins Parent POM Project</l:description><l:license name='MIT License' url='https://opensource.org/licenses/MIT'/></l:dependency></l:dependencies>
