@@ -1,7 +1,0 @@
-#surefire_0
-#Thu Oct 31 14:32:14 CST 2019
-java.io.tmpdir=/Users/sunweisheng/Documents/HomeCode/Jenkins/demo-plugin/target/tmp
-user.dir=/Users/sunweisheng/Documents/HomeCode/Jenkins/demo-plugin
-hudson.udp=-1
-localRepository=/Users/sunweisheng/.m2/repository
-basedir=/Users/sunweisheng/Documents/HomeCode/Jenkins/demo-plugin
