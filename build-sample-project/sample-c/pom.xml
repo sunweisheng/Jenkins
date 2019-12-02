@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bluersw</groupId>
-	<artifactId>ci-demo-a</artifactId>
+	<artifactId>sample-c</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ci-demo-a</name>
-	<description>Demo project for jenkins CI </description>
+	<name>sample-c</name>
+	<description>Spring Cloud Build Sample Project C</description>
 
 	<properties>
 		<java.version>1.8</java.version>
