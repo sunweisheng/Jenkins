@@ -1,7 +1,7 @@
-package com.bluersw.jenkins.shared.library
+package com.bluersw.jenkins-shared-library
 
 @Library('shared-library')
-import com.bluersw.jenkins.shared.library.Utils
+import com.bluersw.jenkins-shared-library.Utils
 
 sh acme.name
 acme.name = 'something'
@@ -18,7 +18,7 @@ parallel(
                 def utils = new Utils()
                 sh "${utils.gitTools()}"
                 sh 'sleep 3'
-                String json = libraryResource 'com/bluersw/jenkins/shared/library/request.json'
+                String json = libraryResource 'com/bluersw/jenkins-shared-library/request.json'
                 println json
             }
         },

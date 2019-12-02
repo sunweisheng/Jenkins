@@ -1,4 +1,4 @@
-package com.bluersw.jenkins.shared.library
+package com.bluersw.jenkins-shared-library
 
 class Utils implements Serializable {
 

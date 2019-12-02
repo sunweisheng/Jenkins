@@ -1,4 +1,4 @@
-package com.bluersw.jenkins.shared.library
+package com.bluersw.jenkins-shared-library
 
 import static com.lesfurets.jenkins.unit.global.lib.LibraryConfiguration.library
 import static com.lesfurets.jenkins.unit.global.lib.LocalSource.localSource
@@ -36,7 +36,7 @@ class TestSharedLibrary extends BasePipelineTest {
                                .retriever(localSource(sharedLibs))
                                .build()
         helper.registerSharedLibrary(library)
-        runScript('com/bluersw/jenkins/shared/library/pipelineUsingSharedLib.groovy')
+        runScript('com/bluersw/jenkins-shared-library/pipelineUsingSharedLib.groovy')
         printCallStack()
     }
 }
