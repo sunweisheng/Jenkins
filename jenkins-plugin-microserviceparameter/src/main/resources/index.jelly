@@ -1,0 +1,5 @@
+<!--插件的概要描述，可以在插件列表中看到-->
+<?jelly escape-by-default='true'?>
+<div>
+    选择Spring Cloud微服务子目录进行构建的子目录复选框。
+</div>
