@@ -2,15 +2,16 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout"
 		 xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+	<!--在所对应的类中有getName()方法就可以绑定值-->
 	<f:entry title="${%parameter.name}" field="name">
-		<f:textbox/>
+		<f:textbox />
 	</f:entry>
 	<!--/help/parameter/下是系统统一帮助文件位置-->
 	<f:entry title="${%parameter.description}" help="/help/parameter/description.html" field="description">
-		<f:textarea name="description" value="${description}" />
+		<f:textarea name="description" />
 	</f:entry>
 	<!--元素的帮助文件在同级目录，命名规则是help-{field}.html-->
-	<f:entry title="${%parameter.data}" field="data">
-		<f:textbox />
+	<f:entry title="${%parameter.subdirectory}" field="subdirectory">
+		<f:textbox  />
 	</f:entry>
 </j:jelly>
