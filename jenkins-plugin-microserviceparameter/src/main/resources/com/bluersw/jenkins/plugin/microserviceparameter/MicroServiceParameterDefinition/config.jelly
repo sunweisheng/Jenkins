@@ -4,7 +4,7 @@
 		 xmlns:t="/lib/hudson" xmlns:f="/lib/form">
 	<!--在所对应的类中有getName()方法就可以绑定值-->
 	<f:entry title="${%parameter.name}" field="name">
-		<f:textbox />
+		<f:textbox default="MicroServiceParameter" />
 	</f:entry>
 	<!--/help/parameter/下是系统统一帮助文件位置-->
 	<f:entry title="${%parameter.description}" help="/help/parameter/description.html" field="description">

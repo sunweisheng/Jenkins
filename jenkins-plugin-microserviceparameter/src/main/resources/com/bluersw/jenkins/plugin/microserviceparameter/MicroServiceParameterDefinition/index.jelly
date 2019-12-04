@@ -1,0 +1,18 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+		 xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+		 xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+	<st:adjunct includes="org.kohsuke.stapler.jquery"/>
+	<st:adjunct includes="com.bluersw.jenkins.plugin.microserviceparameter.javascript.ms-parameter"/>
+	<f:entry title="${it.name}" description="${it.description}">
+		<br/>
+		<input type="hidden" name="name" value="${it.name}"/>
+		<div>${%index.subdirectory}</div>
+		<f:textbox value="${it.subdirectory}" />
+		<div id="com-bluersw-subdirectory"/>
+	</f:entry>
+	<script type="text/javascript">
+		var parentDiv = document.getElementById('com-bluersw-subdirectory')
+		initSubdirectory("${it.subdirectory}",parentDiv)
+	</script>
+</j:jelly>
