@@ -3,8 +3,6 @@ function initSubdirectory(subdirectory,parentDiv){
 		console.log(subdirectory)
 
 		for(var i=0;i<subdirectoryArray.length;i++){
-		alert(subdirectoryArray[i])
-
         add(parentDiv,subdirectoryArray[i],subdirectoryArray[i])
 		}
 }
