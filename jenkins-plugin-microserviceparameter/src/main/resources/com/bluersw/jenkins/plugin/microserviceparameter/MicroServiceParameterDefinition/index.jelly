@@ -3,21 +3,19 @@
 		 xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
 		 xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
 	<st:adjunct includes="com.bluersw.jenkins.plugin.microserviceparameter.javascript.ms-parameter"/>
+	<j:set var="divId" value="${it.divUUID}" scope="parent"/>
 	<f:entry title="${it.name}" description="${it.description}">
 		<br/>
+		<div name="parameter" id="${divId}">
 		<input type="hidden" name="name" value="${it.name}" />
 		<input type="hidden" name="description" value="${it.description}" />
-		<div>${%index.subdirectory}</div>
-		<f:textbox value="${it.subdirectory}" field="subdirectory" />
-		<div id="com-bluersw-subdirectory"/>
+			<input type="hidden" name="profiles" value="${it.profiles}" />
+		<div>${%index.profiles}:</div>
+		<div id="${divId}-profiles"/>
+		</div>
 	</f:entry>
 	<script type="text/javascript">
-		var parentDiv = document.getElementById('com-bluersw-subdirectory')
-		//initSubdirectory("${it.subdirectory}",parentDiv)
+		var profilesDiv = document.getElementById('${divId}-profiles')
+		initProfiles(profilesDiv,"${it.profiles}")
 	</script>
-	<div name="parameter">
-		<input type="hidden" name="name" value="${it.name}" />
-		<input type="hidden" name="description" value="${it.description}" />
-		<input type="hidden" name="subdirectory" value="${it.subdirectory}" />
-	</div>
 </j:jelly>

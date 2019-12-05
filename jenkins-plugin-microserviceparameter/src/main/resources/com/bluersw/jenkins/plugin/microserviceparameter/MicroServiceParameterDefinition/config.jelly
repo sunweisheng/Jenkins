@@ -11,7 +11,7 @@
 		<f:textarea name="description" />
 	</f:entry>
 	<!--元素的帮助文件在同级目录，命名规则是help-{field}.html-->
-	<f:entry title="${%parameter.subdirectory}" field="subdirectory">
+	<f:entry title="${%parameter.profiles}" field="profiles">
 		<f:textbox  />
 	</f:entry>
 </j:jelly>
