@@ -36,6 +36,7 @@ function initProfiles(profileDIV,profiles){
 	function selAll(es) {
 		var selects = document.getElementsByName("selectProfile");
 		for (var i = 0; i < selects.length; i++) {
+			console.log(selects[i])
 			selects[i].checked = es.checked;
 		}
 	}

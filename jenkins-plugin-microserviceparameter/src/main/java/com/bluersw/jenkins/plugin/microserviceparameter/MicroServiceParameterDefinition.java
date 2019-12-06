@@ -7,6 +7,7 @@ import javax.annotation.CheckForNull;
 import javax.servlet.ServletException;
 
 import hudson.Extension;
+import hudson.cli.CLICommand;
 import hudson.model.ParameterDefinition;
 import hudson.model.ParameterValue;
 import hudson.util.FormValidation;
@@ -16,8 +17,10 @@ import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 import org.kohsuke.stapler.StaplerRequest;
 
+import static org.apache.commons.lang.StringUtils.isBlank;
+
 //微服务构建参数类，构建参数必须继承ParameterDefinition，继承后可以在Add Parameter选项中出现
-public class MicroServiceParameterDefinition extends ParameterDefinition {
+public class MicroServiceParameterDefinition extends ParameterDefinition implements ChangeMSParameterPlugin{
 
 	private static final Logger LOG = Logger.getLogger(MicroServiceParameterDefinition.class.getName());
 
@@ -52,18 +55,51 @@ public class MicroServiceParameterDefinition extends ParameterDefinition {
 		this.profiles = profiles;
 	}
 
+	//构建之前选择参数内容后创建构建过程需要的参数值对象
 	@CheckForNull
 	@Override
 	public ParameterValue createValue(StaplerRequest staplerRequest, JSONObject jsonObject) {
 
-		return null;
+		String name = jsonObject.getString("name");
+		String selectValue[] = staplerRequest.getParameterValues("selectProfile");
+
+		return this.createParameterValue(name,selectValue);
 	}
 
 	@CheckForNull
 	@Override
 	public ParameterValue createValue(StaplerRequest staplerRequest) {
 
-		return null;
+		String name[] = staplerRequest.getParameterValues("name");
+		String selectValue[] = staplerRequest.getParameterValues("selectProfile");
+
+		if (name == null || name.length == 0 || isBlank(name[0])) {
+			return new MicroServiceParameterValue(getName(), "");
+		}
+
+		return this.createParameterValue(name[0],selectValue);
+	}
+
+	private ParameterValue createParameterValue(String name,String selectValue[]){
+		StringBuilder strValue = new StringBuilder();
+		for(int i=0; i<selectValue.length; i++){
+			strValue.append(selectValue[i]);
+			if(i!=selectValue.length-1) {
+				strValue.append(",");
+			}
+		}
+
+		return new MicroServiceParameterValue(name,strValue.toString());
+	}
+
+	@Override
+	public ParameterValue createValue(CLICommand command, String value) throws IOException, InterruptedException {
+		return new MicroServiceParameterValue(getName(), value);
+	}
+
+	@Override
+	public void Change(String profiles) {
+		this.profiles = profiles;
 	}
 
 	//@Symbol定义的名字可以在脚本模式下使用此名字使用插件对象
