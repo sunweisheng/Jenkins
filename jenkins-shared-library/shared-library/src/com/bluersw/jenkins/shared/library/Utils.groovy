@@ -2,7 +2,11 @@ package com.bluersw.jenkins.shared.library
 
 import hudson.model.Job
 import hudson.model.ParameterDefinition
+import hudson.model.ParameterValue
 import hudson.model.ParametersDefinitionProperty
+import hudson.model.StringParameterValue
+import net.sf.json.JSONObject
+import netscape.javascript.JSObject
 
 class Utils implements Serializable{
 
@@ -20,6 +24,10 @@ class Utils implements Serializable{
 		Job job = this.script.$build().getParent()
 		ParametersDefinitionProperty paramsJobProperty = job.getProperty(ParametersDefinitionProperty.class)
 		ParameterDefinition ms = paramsJobProperty.getParameterDefinition("MicroServiceParameter")
-		this.script.println(ms.name)
+		if (ms != null) {
+			this.script.println(ms.name)
+			ParameterValue value = new StringParameterValue("newInstance","aaa,bbb,ccc")
+			ms.copyWithDefaultValue(value)
+		}
 	}
 }

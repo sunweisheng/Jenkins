@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Logger;
 import javax.annotation.CheckForNull;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.servlet.ServletException;
 
 import hudson.Extension;
@@ -20,7 +22,7 @@ import org.kohsuke.stapler.StaplerRequest;
 import static org.apache.commons.lang.StringUtils.isBlank;
 
 //微服务构建参数类，构建参数必须继承ParameterDefinition，继承后可以在Add Parameter选项中出现
-public class MicroServiceParameterDefinition extends ParameterDefinition implements ChangeMSParameterPlugin{
+public class MicroServiceParameterDefinition extends ParameterDefinition {
 
 	private static final Logger LOG = Logger.getLogger(MicroServiceParameterDefinition.class.getName());
 
@@ -98,8 +100,13 @@ public class MicroServiceParameterDefinition extends ParameterDefinition impleme
 	}
 
 	@Override
-	public void Change(String profiles) {
-		this.profiles = profiles;
+	public ParameterDefinition copyWithDefaultValue(ParameterValue defaultValue) {
+		if (defaultValue.getName() == "newInstance") {
+			this.profiles = defaultValue.getValue().toString();
+			return this;
+		}
+		else
+			return super.copyWithDefaultValue(defaultValue);
 	}
 
 	//@Symbol定义的名字可以在脚本模式下使用此名字使用插件对象
