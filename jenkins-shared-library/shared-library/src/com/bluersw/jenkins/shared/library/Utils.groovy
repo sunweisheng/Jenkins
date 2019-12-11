@@ -30,4 +30,20 @@ class Utils implements Serializable{
 			ms.copyWithDefaultValue(value)
 		}
 	}
+
+	void PrintInfo(){
+		script.println(script.toString())
+		script.println(script instanceof Job)
+		def o = script.$build()
+		script.println(o.toString())
+		script.println(o instanceof Job)
+		def oo =this.script.$build().getParent()
+		script.println(oo.toString())
+		script.println(oo instanceof Job)
+
+		Job job = this.script.$build().getParent()
+
+		script.println(job.getName())
+
+	}
 }
