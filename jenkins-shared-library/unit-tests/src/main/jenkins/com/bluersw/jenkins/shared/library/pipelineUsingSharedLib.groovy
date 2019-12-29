@@ -14,6 +14,10 @@ node() {
 
 		String json = libraryResource 'com/bluersw/jenkins/shared/library/request.json'
 		println json
+
+		def j = readJSON(json)
+
+		utils.TestJsonPrint(j)
 	}
 }
 

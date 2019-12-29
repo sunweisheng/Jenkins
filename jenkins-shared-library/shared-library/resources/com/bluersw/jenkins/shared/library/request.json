@@ -1,6 +1,15 @@
 {
-  "GlobalVariable": {},
-  "ProjectProfile": {},
+  "GlobalVariable": {
+    "GV1": 12345,
+    "GV2": 67890
+  },
+  "ProjectProfile": {
+    "PP1": {
+      "PP1-1": "P1-1",
+      "PP1-2": "P1-2"
+    },
+    "PP2": "P2-1"
+  },
   "Environment": {},
   "CodeScanner": {},
   "UnitTest": {},

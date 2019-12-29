@@ -1,6 +1,8 @@
 package com.bluersw.jenkins.shared.library
 
 import com.lesfurets.jenkins.unit.BasePipelineTest
+import javafx.scene.text.Text
+import net.sf.json.JSONObject
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -42,6 +44,8 @@ class TestSharedLibrary extends BasePipelineTest {
 	@Test
 	void library_annotation() throws Exception {
 		boolean exception = false
+		helper.registerAllowedMethod("readJSON",[String.class],{json->return JSONObject.fromObject(json)}
+		)
 		runScript('com/bluersw/jenkins/shared/library/pipelineUsingSharedLib.groovy')
 		printCallStack()
 	}

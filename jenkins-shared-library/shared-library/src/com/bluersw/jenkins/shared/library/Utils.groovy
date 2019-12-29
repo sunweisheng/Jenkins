@@ -5,6 +5,7 @@ import hudson.model.ParameterDefinition
 import hudson.model.ParameterValue
 import hudson.model.ParametersDefinitionProperty
 import hudson.model.StringParameterValue
+import net.sf.json.JSONObject
 
 class Utils implements Serializable{
 
@@ -43,5 +44,19 @@ class Utils implements Serializable{
 
 		script.println(job.getName())
 
+	}
+
+	void TestJsonPrint(JSONObject json){
+		Iterator iterator = json.keys()
+		while (iterator.hasNext()) {
+			String key = (String) iterator.next()
+			Object obj = json.get(key)
+			if (obj instanceof JSONObject && !((JSONObject) obj).isEmpty()) {
+				TestJsonPrint((JSONObject) obj)
+			}
+			else {
+				script.println("key:" + key + " value:" + obj)
+			}
+		}
 	}
 }
