@@ -19,8 +19,14 @@
 		<junit.version>4.12</junit.version>
 		<jenkins-pipeline-unit.version>1.1</jenkins-pipeline-unit.version>
 		<groovy-eclipse-compiler.version>3.5.0-01</groovy-eclipse-compiler.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
