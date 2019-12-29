@@ -11,6 +11,9 @@ node() {
 		utils.TestPrint()
 		sayHello()
 		sh "message"
+
+		String json = libraryResource 'com/bluersw/jenkins/shared/library/request.json'
+		println json
 	}
 }
 

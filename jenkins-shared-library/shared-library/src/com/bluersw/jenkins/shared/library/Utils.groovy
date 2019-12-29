@@ -5,8 +5,6 @@ import hudson.model.ParameterDefinition
 import hudson.model.ParameterValue
 import hudson.model.ParametersDefinitionProperty
 import hudson.model.StringParameterValue
-import net.sf.json.JSONObject
-import netscape.javascript.JSObject
 
 class Utils implements Serializable{
 
