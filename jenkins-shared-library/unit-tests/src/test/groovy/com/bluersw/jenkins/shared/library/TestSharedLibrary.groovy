@@ -25,7 +25,7 @@ class TestSharedLibrary extends BasePipelineTest {
 	@Override
 	@Before
 	void setUp() throws Exception {
-		scriptRoots += 'src/main/jenkins'
+		scriptRoots += '../unit-tests/src/main/jenkins'
 		super.setUp()
 		binding.setVariable('scm', [branch: 'master'])
 
