@@ -1,2 +1,3 @@
 # Jenkins
-Jenkins 学习资料
+
+* [安装Jenkins](Install-Jenkins.md)
