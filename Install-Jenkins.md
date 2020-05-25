@@ -81,4 +81,6 @@ systemctl enable jenkins.service
 reboot
 ```
 
-Jenkins默认端口：8080，启动后访问http://ServerIP:8080进行访问，初始密码在/root/.jenkins/secrets/initialAdminPassword。
+- Jenkins默认端口：8080
+- 启动后访问http://ServerIP:8080进行访问
+- 初始密码在/root/.jenkins/secrets/initialAdminPassword。
