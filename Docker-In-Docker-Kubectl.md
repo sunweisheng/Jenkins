@@ -53,7 +53,7 @@ docker build -t bluersw/centos-7-docker-kubectl:2.0 .
 # 试运行命令
 docker run -v /var/run/docker.sock:/var/run/docker.sock -it bluersw/centos-7-docker-kubectl:2.0 /bin/bash
 
-#Pull命令
+# Pull命令
 docker pull bluersw/centos-7-docker-kubectl:2.0
 ```
 
@@ -416,7 +416,7 @@ Error from server (Forbidden): pods is forbidden: User "jenkins" cannot list res
 目前新账号没有分配权限无法使用，创建dev-test命名空间，并创建管理该命名空间下pod资源的角色，然后绑定到jenkins账户：
 
 ```shell
-#创建yaml内容但不执行,查看资源yaml可以加--dry-run -o yaml参数
+# 创建yaml内容但不执行,查看资源yaml可以加--dry-run -o yaml参数
 kubectl create namespace dev-test
 ```
 
@@ -600,7 +600,7 @@ subjects:
 # 创建
 kubectl apply -f cluster-reader.yaml
 
-#绑定
+# 绑定
 kubectl apply -f cluster-reader-jenkins.yaml
 ```
 
