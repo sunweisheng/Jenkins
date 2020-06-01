@@ -506,6 +506,11 @@ spec:
     command: ["sleep","3600"]
 ```
 
+```shell
+#先创建后面通过Jenkins删除再创建
+kubectl apply -f /root/yaml/dnsutils.yaml -n dev-test
+```
+
 修改构建脚本：
 
 ```groovy
@@ -519,9 +524,9 @@ podTemplate (inheritFrom: "jenkins-slave-temp"){
         container('jnlp-docker'){
             stage("Run docker"){
                 sh 'kubectl config use-context jenkins@default-cluster'
-                sh 'kubectl delete -f /root/yaml/ndsutils.yaml -n dev-test'
+                sh 'kubectl delete -f /root/yaml/dnsutils.yaml -n dev-test'
                 sh 'kubectl get pod -n dev-test'
-                sh 'kubectl apply -f /root/yaml/ndsutils.yaml -n dev-test'
+                sh 'kubectl apply -f /root/yaml/dnsutils.yaml -n dev-test'
                 sh 'kubectl get pod -n dev-test'
             }
         }
