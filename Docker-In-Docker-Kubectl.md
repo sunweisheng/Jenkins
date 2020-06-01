@@ -491,6 +491,21 @@ Error from server (Forbidden): pods is forbidden: User "jenkins" cannot list res
 
 在PodTemplate中增加Host Path Volume：/root/yaml，里面放入一个pod资源的yaml文件
 
+这个Pod资源使用以前提到的dnsutils，yaml资源内容如下：
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dnsutils
+spec:
+  containers:
+  - name: dnsutils
+    image: mydlqclub/dnsutils:1.3
+    imagePullPolicy: IfNotPresent
+    command: ["sleep","3600"]
+```
+
 修改构建脚本：
 
 ```groovy
