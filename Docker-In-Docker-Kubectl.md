@@ -558,13 +558,13 @@ hello world
 + kubectl config use-context jenkins@default-cluster
 Switched to context "jenkins@default-cluster".
 [Pipeline] sh
-+ kubectl delete -f /root/yaml/ndsutils.yaml -n dev-test
++ kubectl delete -f /root/yaml/dnsutils.yaml -n dev-test
 pod "dnsutils" deleted
 [Pipeline] sh
 + kubectl get pod -n dev-test
 No resources found in dev-test namespace.
 [Pipeline] sh
-+ kubectl apply -f /root/yaml/ndsutils.yaml -n dev-test
++ kubectl apply -f /root/yaml/dnsutils.yaml -n dev-test
 pod/dnsutils created
 [Pipeline] sh
 + kubectl get pod -n dev-test
