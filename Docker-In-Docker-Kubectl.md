@@ -423,10 +423,11 @@ kubectl create namespace dev-test
 创建角色：
 
 ```yaml
-kind: Role
 apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: Role
 metadata:
   name: jenkins-role
+  namespace: costaccounting
 rules:
 - apiGroups: [""]
   resources: ["pods"]
@@ -443,6 +444,15 @@ rules:
 - apiGroups: [""]
   resources: ["secrets"]
   verbs: ["get"]
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: [""]
+  resources: ["services"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
+- apiGroups: ["extensions"]
+  resources: ["ingresses"]
+  verbs: ["create","delete","get","list","patch","update","watch"]
 ```
 
 ```shell
