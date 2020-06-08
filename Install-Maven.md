@@ -57,3 +57,99 @@ vi ~/.zshenv
 # 添加如下命令
 source /etc/profile
 ```
+
+## 私有仓库设置
+
+```shell
+vi ~/.m2/settings.xml
+```
+
+添加如下内容：
+
+```xml
+<servers>
+    <server>
+      <id>releases</id>
+      <username>admin</username>
+      <password>**********</password>
+    </server>
+    <server>
+      <id>snapshots</id>
+      <username>admin</username>
+      <password>**********</password>
+    </server>
+  </servers>
+
+  <mirrors>
+     <mirror>
+      <id>repo.bluersw.com</id>
+      <mirrorOf>*</mirrorOf>
+      <name>Home Repository Mirror.</name>
+      <url>http://repo.bluersw.com:8081/repository/maven-public/</url>
+    </mirror>
+  </mirrors>
+
+  <profiles>
+    <profile>
+      <id>repo.bluersw.com</id>
+      <repositories>
+        <repository>
+          <id>nexus</id>
+          <name>Public Repositories</name>
+          <url>http://repo.bluersw.com:8081/repository/maven-public/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+        </repository>
+        <repository>
+          <id>central</id>
+          <name>Central Repositories</name>
+          <url>http://repo.bluersw.com:8081/repository/maven-central/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>release</id>
+          <name>Release Repositories</name>
+          <url>http://repo.bluersw.com:8081/repository/maven-releases/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+        </repository>
+        <repository>
+          <id>snapshots</id>
+          <name>Snapshot Repositories</name>
+          <url>http://repo.bluersw.com:8081/repository/maven-snapshots/</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>plugins</id>
+          <name>Plugin Repositories</name>
+          <url>http://repo.bluersw.com:8081/repository/maven-public/</url>
+        </pluginRepository>
+      </pluginRepositories>
+      </profile>
+  </profiles>
+
+  <activeProfiles>
+    <activeProfile>repo.bluersw.com</activeProfile>
+  </activeProfiles>
+
+```
+
+* 若项目版本号末尾带有 -SNAPSHOT，则会发布到snapshots快照版本仓库
+* 若项目版本号末尾带有 -RELEASES 或什么都不带，则会发布到releases正式版本仓库
