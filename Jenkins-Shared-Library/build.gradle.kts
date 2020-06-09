@@ -15,11 +15,17 @@ java {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     val spock = "org.spockframework:spock-core:1.2-groovy-2.4"
     testImplementation(spock)
     testImplementation("org.assertj:assertj-core:3.12.2")
     integrationTestImplementation(spock)
+
+    testImplementation("junit:junit:4.12")
 }
 
 jenkinsIntegration {
