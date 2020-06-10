@@ -15,5 +15,9 @@ class JPUExampleSpec extends BasePipelineTest{
 
 	@Test
 	void "example unit test"() throws Exception {
+		def script = loadScript('vars/myGlobal.groovy')
+		script.call()
+		printCallStack()
+		assertJobStatusSuccess()
 	}
 }

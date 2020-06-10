@@ -1,6 +1,3 @@
-import com.mkobit.jenkins.pipelines.http.AnonymousAuthentication
-import java.io.ByteArrayOutputStream
-
 plugins {
     id("com.mkobit.jenkins.pipelines.shared-library") version "0.10.1"
 }
@@ -28,15 +25,12 @@ dependencies {
     testImplementation("junit:junit:4.12")
 }
 
-jenkinsIntegration {
-    baseUrl.set(uri("http://localhost:5050").toURL())
-    authentication.set(providers.provider { AnonymousAuthentication })
-    downloadDirectory.set(layout.projectDirectory.dir("jenkinsResources"))
-}
+
 
 sharedLibrary {
     // TODO: this will need to be altered when auto-mapping functionality is complete
-    coreVersion.set(jenkinsIntegration.downloadDirectory.file("core-version.txt").map { it.asFile.readText().trim() })
+    //coreVersion.set(jenkinsIntegration.downloadDirectory.file("core-version.txt").map { it.asFile.readText().trim() })
+    coreVersion.set("2.164.3")
     // TODO: retrieve downloaded plugin resource
     pluginDependencies {
         dependency("org.jenkins-ci.plugins", "pipeline-build-step", "2.9")
