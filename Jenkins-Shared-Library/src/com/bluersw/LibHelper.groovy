@@ -1,19 +1,26 @@
 package com.bluersw
 
-import com.cloudbees.groovy.cps.NonCPS
+import org.jenkinsci.plugins.workflow.cps.CpsScript
+import org.jenkinsci.plugins.workflow.job.WorkflowJob
+import org.jenkinsci.plugins.workflow.job.WorkflowRun
 
 class LibHelper {
-	private script
-	LibHelper(script) {
+
+	private CpsScript script
+	private WorkflowRun workflowRun
+	private WorkflowJob workflowJob
+
+	LibHelper(CpsScript script){
 		this.script = script
+		this.workflowRun = this.script.$build()
+		this.workflowJob = workflowRun.getParent()
+		def projectSetting = "project Setting"
+		this.script.setProperty("projectSetting",projectSetting)
+		this.script.print(this.script.projectSetting)
+		this.script.print("构建完成。")
 	}
 
-	void sayHelloTo(String name) {
-		script.echo("LibHelper says hello to $name!")
-	}
-
-	@NonCPS
-	List<Integer> nonCpsDouble(List<Integer> integers) {
-		integers.collect { it * 2 }
+	void echoInfo(){
+		this.script.print(this.script.projectSetting)
 	}
 }

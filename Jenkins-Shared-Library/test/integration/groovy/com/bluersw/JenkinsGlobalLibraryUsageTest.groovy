@@ -37,14 +37,19 @@ class JenkinsGlobalLibraryUsageTest {
 	void testingMyLibrary() {
 		CpsFlowDefinition flow = new CpsFlowDefinition('''
         import com.bluersw.LibHelper
+        
+        import groovy.transform.Field
+        
+        @Field public def globalVariable
 
-        final libHelper = new LibHelper(this)
-        libHelper.sayHelloTo('bluersw')
+        LibHelper libHelper = new LibHelper(this)
+        libHelper.echoInfo()
     '''.stripIndent(), true)
 		WorkflowJob workflowJob = rule.createProject(WorkflowJob, 'project')
 		workflowJob.definition = flow
 		WorkflowRun result = rule.buildAndAssertSuccess(workflowJob)
-		rule.assertLogContains('LibHelper says hello to bluersw!', result)
+		rule.assertLogContains('global Variable', result)
+		rule.assertLogContains('project Setting', result)
 	}
 
 	@Test

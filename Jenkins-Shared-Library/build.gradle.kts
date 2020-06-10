@@ -2,6 +2,8 @@ plugins {
     id("com.mkobit.jenkins.pipelines.shared-library") version "0.10.1"
 }
 
+group = "com.bluersw"
+
 tasks {
     wrapper {
         gradleVersion = "5.5.1"
@@ -29,7 +31,6 @@ dependencies {
 
 sharedLibrary {
     // TODO: this will need to be altered when auto-mapping functionality is complete
-    //coreVersion.set(jenkinsIntegration.downloadDirectory.file("core-version.txt").map { it.asFile.readText().trim() })
     coreVersion.set("2.164.3")
     // TODO: retrieve downloaded plugin resource
     pluginDependencies {
