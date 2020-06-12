@@ -3,7 +3,9 @@
 ## 准备工作
 
 [安装Jenkins](https://github.com/sunweisheng/Jenkins/blob/master/Install-Jenkins.md)
+
 [安装一台Windows服务器](https://github.com/sunweisheng/Kvm/blob/master/Create-win2008R2.md)
+
 [安装一台Linux服务器](https://github.com/sunweisheng/Kvm/blob/master/Create-Bridge-Cluster.md)
 
 ## Linux-Slave
