@@ -6,3 +6,4 @@
 * [安装 Maven](Install-Maven.md)
 * [安装 Gradle](Install-Gradle.md)
 * [安装 Groovy](Install-Groovy.md)
+* [创建Jenkins的Slave服务器](Jenkins-Slave.md)
