@@ -103,3 +103,25 @@ PS:将项目目录下的文件拷贝到GitHub仓库目录下面，并用IDEA打�
 
 ![Alt text](http://static.bluersw.com/images/Jenkins/sssp-01.png)
 
+## Debug
+
+```shell
+export MAVEN_OPTS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"
+
+mvn hpi:run -Djetty.port=8090
+```
+
+![Alt text](http://static.bluersw.com/images/Jenkins/sssp-04.png)
+
+在IDEA右上方Edit Configurations...
+![Alt text](http://static.bluersw.com/images/Jenkins/sssp-03.png)
+
+创建Remote-Debug
+
+![Alt text](http://static.bluersw.com/images/Jenkins/sssp-06.png)
+![Alt text](http://static.bluersw.com/images/Jenkins/sssp-02.png)
+
+应用启动后，在右上方点击Debug ‘Remote-Debug’
+![Alt text](http://static.bluersw.com/images/Jenkins/sssp-05.png)
+
+进入Debug模式
