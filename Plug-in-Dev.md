@@ -124,4 +124,4 @@ mvn hpi:run -Djetty.port=8090
 应用启动后，在右上方点击Debug ‘Remote-Debug’
 ![Alt text](http://static.bluersw.com/images/Jenkins/sssp-05.png)
 
-进入Debug模式
+访问http://localhost:8090/jenkins/ 进入Debug模式。
