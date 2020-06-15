@@ -329,7 +329,25 @@ function bindOnChange(parent,requestBasicUrl){
 }
 ```
 
-因为"$"符号和jelly的数据绑定符号冲突，所以用jQuery.noConflict();换成jQuery，该文件在/src/main/resources/com/bluersw/javascript/slave-parameter.js。
+因为"$"符号和jelly的数据绑定符号冲突，所以用jQuery.noConflict();换成jQuery，该文件在/src/main/resources/com/bluersw/javascript/slave-parameter.js,每次选择都会调用DescriptorImpl类的doSetDefaultValue方法更新默认值。
+
+选择参数点击“构建”按钮之后，会将页面元素的值都通过Json格式传到服务器端调用SlaveParameterDefinition类的createValue方法，创建参数返回值后续交给构建脚本使用：
+
+```java
+/**
+* 创建Slave服务器参数的参数结果对象（Create parameter result object for Slave server parameter）
+* @param staplerRequest StaplerRequest对象（StaplerRequest object）
+* @param jsonObject Slave服务器参数的结果对象，Json格式（Slave Server Parameter result object, Json format）
+* @return 参数结果对象 （Parameter result object）
+*/
+@CheckForNull
+@Override
+public ParameterValue createValue(StaplerRequest staplerRequest, JSONObject jsonObject)
+```
+
+参数jsonObject中有name和value连个页面元素的值，这样就可以创建用于脚本使用的变量和值的健值对了。
+
+总结：SlaveParameterDefinition负责创建参数类对象、绑定属性类数据、创建构建参数结果对象（参数值），DescriptorImpl内部静态类负责创建SlaveParameterDefinition对象、实现页面元素的绑定方法、实现页面请求的接口方法、验证用户输入、显示该构建参数的名称。
 
 其他两个类内容很少请看完整的项目代码：
 
