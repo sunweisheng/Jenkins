@@ -347,7 +347,9 @@ public ParameterValue createValue(StaplerRequest staplerRequest, JSONObject json
 
 参数jsonObject中有name和value连个页面元素的值，这样就可以创建用于脚本使用的变量和值的健值对了。
 
-总结：SlaveParameterDefinition负责创建参数类对象、绑定属性类数据、创建构建参数结果对象（参数值），DescriptorImpl内部静态类负责创建SlaveParameterDefinition对象、实现页面元素的绑定方法、实现页面请求的接口方法、验证用户输入、显示该构建参数的名称。
+总结：
+
+SlaveParameterDefinition负责创建参数类对象、绑定属性类数据、创建构建参数结果对象（参数值），DescriptorImpl内部静态类负责创建SlaveParameterDefinition对象、实现页面元素的绑定方法、实现页面请求的接口方法、验证用户输入、显示该构建参数的名称。
 
 其他两个类内容很少请看完整的项目代码：
 
