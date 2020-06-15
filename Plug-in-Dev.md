@@ -311,9 +311,27 @@ name参数的值来自页面中的input元素：
 public String doSetDefaultValue(@AncestorInPath Job job, @QueryParameter String name, @QueryParameter String value)
 ```
 
-js调用地址是.../setDefaultValue?name=xxx&value=xxx。
+js调用地址是.../setDefaultValue?name=xxx&value=xxx，调用函数是：
 
-其他两个类：
+```javascript
+jQuery.noConflict();
+
+function bindOnChange(parent,requestBasicUrl){
+	var selectE = parent.find('#slaveParameterSelect');
+	var messageD = parent.find('#result_message');
+	selectE.change(function(){
+		requestUrl = requestBasicUrl + "&value=" + jQuery(this).children('option:selected').val();
+		jQuery.ajax({url:requestUrl,success:function(result){
+			messageD.text(result);
+			}})
+		}
+	)
+}
+```
+
+因为"$"符号和jelly的数据绑定符号冲突，所以用jQuery.noConflict();换成jQuery，该文件在/src/main/resources/com/bluersw/javascript/slave-parameter.js。
+
+其他两个类内容很少请看完整的项目代码：
 
 - SlaveParameterValue：是构建的参数的返回值，用参数名称和选择的值组成。
 - SlaveParameterRebuild：是在构建结果“参数”页面查看的内容。
