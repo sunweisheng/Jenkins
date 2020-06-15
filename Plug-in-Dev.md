@@ -247,15 +247,14 @@ public FormValidation doCheckName(@QueryParameter String name)throws IOException
 	<st:adjunct includes="com.bluersw.slaveParameter"/>
 	<j:set var="instance" value="${it}" />
 	<j:set var="descriptor" value="${it.descriptor}"/>
-	<st:adjunct includes="com.bluersw.script"/>
 	<f:entry title="${it.name}" description="${it.description}">
-		<div name="parameter" id="${it.divUUID}" style="white-space:nowrap" >
+		<div name="parameter" id="${it.divId}" style="white-space:nowrap" >
 			<input type="hidden" name="name" value="${it.name}" />
 			<f:select id="slaveParameterSelect" field="value" default="${it.defaultValue}" style="width:auto;"/>
 			<div id="result_message"></div>
 		</div>
 		<script type="text/javascript">
-			var parentDiv = jQuery('#${it.divUUID}');
+			var parentDiv = jQuery('#${it.divId}');
 			var requestBasicUrl = "${h.getCurrentDescriptorByNameUrl()}/${it.descriptor.descriptorUrl}/setDefaultValue?name=${it.name}";
 			bindOnChange(parentDiv,requestBasicUrl);
 		</script>
