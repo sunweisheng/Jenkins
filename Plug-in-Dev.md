@@ -355,7 +355,9 @@ SlaveParameterDefinition负责创建参数类对象、绑定属性类数据、�
 - SlaveParameterValue：是构建的参数的返回值，用参数名称和选择的值组成。
 - SlaveParameterRebuild：是在构建结果“参数”页面查看的内容。
 
-[完整项目代码](https://github.com/sunweisheng/slave-server-parameter-plugin)
+因为Jenkins已经取消了术语Slave，所以项目改名为Agent Server Parameter。
+
+[完整项目代码](https://github.com/sunweisheng/agent-server-parameter-plugin)
 
 ## 测试
 
