@@ -427,7 +427,6 @@ apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: Role
 metadata:
   name: jenkins-role
-  namespace: costaccounting
 rules:
 - apiGroups: [""]
   resources: ["pods"]
