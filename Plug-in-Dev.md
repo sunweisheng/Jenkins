@@ -357,7 +357,7 @@ SlaveParameterDefinition负责创建参数类对象、绑定属性类数据、�
 
 因为Jenkins已经取消了术语Slave，所以项目改名为Agent Server Parameter。
 
-[完整项目代码:jenkinsci/agent-server-parameter-plugin](https://github.com/jenkinsci/agent-server-parameter-plugin/blob/master/sonar-project.properties)
+[完整项目代码:jenkinsci/agent-server-parameter-plugin](https://github.com/jenkinsci/agent-server-parameter-plugin)
 
 ## 测试
 
