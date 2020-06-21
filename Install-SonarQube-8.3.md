@@ -171,3 +171,169 @@ systemctl start sonarqube.service
 访问 http://192.168.0.5:9000/
 
 默认用户名和密码都是：admin
+
+## 下载SonarScanner
+
+[下载地址](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)
+
+```shell
+sudo chmod a+rwx /etc/profile
+sudo vi /etc/profile
+```
+
+```conf
+SONAR_SCANNER=/Users/sunweisheng/sonar-scanner-4.3.0.2102-macosx
+export PATH=$PATH:$SONAR_SCANNER/bin
+```
+
+```shell
+source /etc/profile
+sudo chmod a-wx /etc/profile
+
+# 测试
+sonar-scanner -v
+
+# 配置SonarQube服务地址
+vi /Users/sunweisheng/sonar-scanner-4.3.0.2102-macosx/conf/sonar-scanner.properties
+
+sonar.host.url=http://sq.bluersw.com:9000
+```
+
+## 使用SonarScanner进行代码扫描
+
+在项目根目录创建sonar-project.properties配置文件
+
+```conf
+# must be unique in a given SonarQube instance
+sonar.projectKey=Jenkins:agent-server-parameter-plugin
+
+sonar.projectVersion=1.0
+
+# Path is relative to the sonar-project.properties file. Defaults to .
+sonar.sources=src
+sonar.sourceEncoding=UTF-8
+sonar.java.binaries=./target/classes
+```
+
+```shell
+# 在项目根目录下执行
+sonar-scanner
+```
+
+```shell
+INFO: Scanner configuration file: /Users/sunweisheng/sonar-scanner-4.3.0.2102-macosx/conf/sonar-scanner.properties
+INFO: Project root configuration file: /Users/sunweisheng/Documents/Test-Jenkins-Plugin/agent-server-parameter-plugin/sonar-project.properties
+INFO: SonarScanner 4.3.0.2102
+INFO: Java 11.0.3 AdoptOpenJDK (64-bit)
+INFO: Mac OS X 10.15.5 x86_64
+INFO: User cache: /Users/sunweisheng/.sonar/cache
+INFO: Scanner configuration file: /Users/sunweisheng/sonar-scanner-4.3.0.2102-macosx/conf/sonar-scanner.properties
+INFO: Project root configuration file: /Users/sunweisheng/Documents/Test-Jenkins-Plugin/agent-server-parameter-plugin/sonar-project.properties
+INFO: Analyzing on SonarQube server 8.3.1
+INFO: Default locale: "zh_CN_#Hans", source code encoding: "UTF-8"
+INFO: Load global settings
+INFO: Load global settings (done) | time=110ms
+INFO: Server id: 86E1FA4D-AXLVFrNXKIv5ZwSXjWeI
+INFO: User cache: /Users/sunweisheng/.sonar/cache
+INFO: Load/download plugins
+INFO: Load plugins index
+INFO: Load plugins index (done) | time=48ms
+INFO: Load/download plugins (done) | time=93ms
+INFO: Process project properties
+INFO: Process project properties (done) | time=5ms
+INFO: Execute project builders
+INFO: Execute project builders (done) | time=2ms
+INFO: Project key: Jenkins:agent-server-parameter-plugin
+INFO: Base dir: /Users/sunweisheng/Documents/Test-Jenkins-Plugin/agent-server-parameter-plugin
+INFO: Working dir: /Users/sunweisheng/Documents/Test-Jenkins-Plugin/agent-server-parameter-plugin/.scannerwork
+INFO: Load project settings for component key: 'Jenkins:agent-server-parameter-plugin'
+INFO: Load project settings for component key: 'Jenkins:agent-server-parameter-plugin' (done) | time=165ms
+INFO: Load quality profiles
+INFO: Load quality profiles (done) | time=143ms
+INFO: Load active rules
+INFO: Load active rules (done) | time=1348ms
+WARN: SCM provider autodetection failed. Please use "sonar.scm.provider" to define SCM of your project, or disable the SCM Sensor in the project settings.
+INFO: Indexing files...
+INFO: Project configuration:
+INFO: Load project repositories
+INFO: Load project repositories (done) | time=87ms
+INFO: 21 files indexed
+INFO: Quality profile for java: Sonar way
+INFO: Quality profile for js: Sonar way
+INFO: Quality profile for web: Sonar way
+INFO: ------------- Run sensors on module Jenkins:agent-server-parameter-plugin
+INFO: Load metrics repository
+INFO: Load metrics repository (done) | time=30ms
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by net.sf.cglib.core.ReflectUtils$1 (file:/Users/sunweisheng/.sonar/cache/52f5340dd05620cd162e2b9a45a57124/sonar-javascript-plugin.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int,java.security.ProtectionDomain)
+WARNING: Please consider reporting this to the maintainers of net.sf.cglib.core.ReflectUtils$1
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+INFO: Sensor JavaSquidSensor [java]
+INFO: Configured Java source version (sonar.java.source): none
+INFO: JavaClasspath initialization
+WARN: Bytecode of dependencies was not provided for analysis of source files, you might end up with less precise results. Bytecode can be provided using sonar.java.libraries property.
+INFO: JavaClasspath initialization (done) | time=7ms
+INFO: JavaTestClasspath initialization
+INFO: JavaTestClasspath initialization (done) | time=0ms
+INFO: Java Main Files AST scan
+INFO: 6 source files to be analyzed
+INFO: 6/6 source files have been analyzed
+INFO: Java Main Files AST scan (done) | time=1038ms
+INFO: Java Test Files AST scan
+INFO: 0 source files to be analyzed
+INFO: Java Test Files AST scan (done) | time=0ms
+INFO: 0/0 source files have been analyzed
+INFO: Java Generated Files AST scan
+INFO: 0 source files to be analyzed
+INFO: Java Generated Files AST scan (done) | time=1ms
+INFO: 0/0 source files have been analyzed
+INFO: Sensor JavaSquidSensor [java] (done) | time=1163ms
+INFO: Sensor SonarCSS Rules [cssfamily]
+INFO: 4 source files to be analyzed
+INFO: 4/4 source files have been analyzed
+INFO: Sensor SonarCSS Rules [cssfamily] (done) | time=1885ms
+INFO: Sensor JaCoCo XML Report Importer [jacoco]
+INFO: 'sonar.coverage.jacoco.xmlReportPaths' is not defined. Using default locations: target/site/jacoco/jacoco.xml,target/site/jacoco-it/jacoco.xml,build/reports/jacoco/test/jacocoTestReport.xml
+INFO: No report imported, no coverage information will be imported by JaCoCo XML Report Importer
+INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=1ms
+INFO: Sensor JavaScript analysis [javascript]
+INFO: 1 source files to be analyzed
+INFO: 1/1 source files have been analyzed
+INFO: Sensor SonarJS [javascript]
+INFO: 1 source files to be analyzed
+INFO: Sensor SonarJS [javascript] (done) | time=93ms
+INFO: 1/1 source files have been analyzed
+INFO: Sensor JavaScript analysis [javascript] (done) | time=2181ms
+INFO: Sensor SurefireSensor [java]
+INFO: parsing [/Users/sunweisheng/Documents/Test-Jenkins-Plugin/agent-server-parameter-plugin/target/surefire-reports]
+INFO: Sensor SurefireSensor [java] (done) | time=22ms
+INFO: Sensor JavaXmlSensor [java]
+INFO: Sensor JavaXmlSensor [java] (done) | time=1ms
+INFO: Sensor HTML [web]
+INFO: Sensor HTML [web] (done) | time=30ms
+INFO: ------------- Run sensors on project
+INFO: Sensor Zero Coverage Sensor
+INFO: Sensor Zero Coverage Sensor (done) | time=7ms
+INFO: Sensor Java CPD Block Indexer
+INFO: Sensor Java CPD Block Indexer (done) | time=15ms
+INFO: SCM Publisher No SCM system was detected. You can use the 'sonar.scm.provider' property to explicitly specify it.
+INFO: CPD Executor 8 files had no CPD blocks
+INFO: CPD Executor Calculating CPD for 3 files
+INFO: CPD Executor CPD calculation finished (done) | time=6ms
+INFO: Analysis report generated in 45ms, dir size=113 KB
+INFO: Analysis report compressed in 32ms, zip size=32 KB
+INFO: Analysis report uploaded in 83ms
+INFO: ANALYSIS SUCCESSFUL, you can browse http://sq.bluersw.com:9000/dashboard?id=Jenkins%3Aagent-server-parameter-plugin
+INFO: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
+INFO: More about the report processing at http://sq.bluersw.com:9000/api/ce/task?id=AXLWHEJaAMl7i6CpKAyw
+INFO: Analysis total time: 9.871 s
+INFO: ------------------------------------------------------------------------
+INFO: EXECUTION SUCCESS
+INFO: ------------------------------------------------------------------------
+INFO: Total time: 10.649s
+INFO: Final Memory: 17M/67M
+INFO: ------------------------------------------------------------------------
+```
+
+访问 http://sq.bluersw.com:9000/dashboard?id=Jenkins%3Aagent-server-parameter-plugin 查看结果。
