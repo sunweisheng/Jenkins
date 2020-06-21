@@ -176,6 +176,8 @@ systemctl start sonarqube.service
 
 [下载地址](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner/)
 
+设置环境变量：
+
 ```shell
 sudo chmod a+rwx /etc/profile
 sudo vi /etc/profile
@@ -201,7 +203,10 @@ sonar.host.url=http://sq.bluersw.com:9000
 
 ## 使用SonarScanner进行代码扫描
 
-在项目根目录创建sonar-project.properties配置文件
+```shell
+# 在项目根目录创建sonar-project.properties配置文件
+vi sonar-project.properties
+```
 
 ```conf
 # must be unique in a given SonarQube instance
