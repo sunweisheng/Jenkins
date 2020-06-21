@@ -8,3 +8,4 @@
 * [安装 Groovy](Install-Groovy.md)
 * [创建Jenkins的Slave服务器](Jenkins-Slave.md)
 * [Jenkins插件开发](Plug-in-Dev.md)
+* [安装SonarQube 8.3版本](Install-SonarQube-8.3.md)
