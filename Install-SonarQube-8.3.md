@@ -115,6 +115,12 @@ vi /etc/sysctl.conf
 vm.max_map_count=655360
 
 sysctl -p
+
+# sonar是启动elasticsearch的用户
+vi /etc/security/limits.conf
+
+sonar hard nofile 65536
+sonar soft nofile 65536
 ```
 
 ## 手工启动检查日志排除错误
