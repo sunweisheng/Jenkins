@@ -1,6 +1,8 @@
 # 创建Global Shared Library项目
 
-Maven设置中设置仓库地址
+[Jenkins Global Shared Library的说明](https://www.jenkins.io/doc/book/pipeline/shared-libraries/)
+
+## Maven设置中设置仓库地址
 
 ```conf
     <repositories>
@@ -11,6 +13,8 @@ Maven设置中设置仓库地址
         ...
     </repositories>
 ```
+
+## 创建项目
 
 ```shell
 # 在工作目录下执行
@@ -68,9 +72,13 @@ package: io.jenkins.pipeline.sample
 
 ![Alt text](http://static.bluersw.com/images/Jenkins/global-shared-library-01.png)
 
-打开项目后将pipelineUsingSharedLib.groovy改名为pipelineUsingSharedLib.Jenkinsfile，TestSharedLibrary测试类里runScript()中的地址也要改一下，红色的错误提示就没了，之后把各个文件夹中的包名（目录名）改成你自己的包名。
+打开项目后将pipelineUsingSharedLib.groovy改名为pipelineUsingSharedLib.Jenkinsfile，TestSharedLibrary测试类里runScript()中的地址也要改一下，红色的错误提示就没了，之后可以把各个文件夹中的目录名（包名）改成你希望的目录名（包名）。
 
-有两个POM文件，分别需求修改一下，主要是各种改名字和增加一些需要的引用：
+## 修改POM
+
+有两个POM文件，项目根目录下的POM文件修改groupId、description即可。
+
+示例：
 
 ```conf
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -87,10 +95,11 @@ package: io.jenkins.pipeline.sample
 </project>
 ```
 
+另一个POM文件在项目目录下的unit-tests子目录下：
+
+首先把groupId、name、description、url等进行修改，示例如下：
+
 ```conf
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.bluersw</groupId>
     <artifactId>global-shared-library-frame</artifactId>
@@ -98,26 +107,20 @@ package: io.jenkins.pipeline.sample
     <name>Global Shared Library Frame</name>
     <description>Global Shared Library Frame</description>
     <url>https://github.com/sunweisheng/global-shared-library-frame</url>
-    <licenses>
-        <license>
-            <name>MIT License</name>
-            <url>https://opensource.org/licenses/MIT</url>
-        </license>
-    </licenses>
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <!-- Dependency versions -->
-        <groovy.version>2.4.17</groovy.version>
-        <junit.version>4.12</junit.version>
-        <jenkins-pipeline-unit.version>1.1</jenkins-pipeline-unit.version>
-        <groovy-eclipse-compiler.version>3.5.0-01</groovy-eclipse-compiler.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+```
+
+然后修改jenkins-pipline-unit的版本号为1.5：
+
+```conf
+<jenkins-pipeline-unit.version>1.5</jenkins-pipeline-unit.version>
+```
+
+最后增加一些需要的依赖引用，比如：
+
+```conf
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <!-- Pick up common dependencies for 2.164.x: https://github.com/jenkinsci/bom#usage -->
                 <groupId>io.jenkins.tools.bom</groupId>
                 <artifactId>bom-2.164.x</artifactId>
                 <version>3</version>
@@ -126,81 +129,124 @@ package: io.jenkins.pipeline.sample
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <dependencies>
-        <dependency>
-            <groupId>org.codehaus.groovy</groupId>
-            <artifactId>groovy-all</artifactId>
-            <version>${groovy.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.lesfurets</groupId>
-            <artifactId>jenkins-pipeline-unit</artifactId>
-            <version>${jenkins-pipeline-unit.version}</version>
-            <scope>test</scope>
-        </dependency>
+```
+
+如果使用CpsScript、WorkflowRun、WorkflowJob这些类型的话，需要添加如下依赖：
+
+```conf
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-job</artifactId>
-            <version>2.0</version>
+            <version>2.35</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jenkins-ci.plugins.workflow</groupId>
             <artifactId>workflow-cps</artifactId>
-            <version>2.23</version>
+            <version>2.74</version>
             <scope>test</scope>
         </dependency>
-    </dependencies>
-    <build>
-        <testSourceDirectory>src/test/groovy</testSourceDirectory>
-        <resources>
-            <resource>
-                <directory>src/main/jenkins</directory>
-            </resource>
-        </resources>
-        <testResources>
-            <testResource>
-                <directory>../shared-library</directory>
-                <targetPath>libs/shared-library@master</targetPath>
-            </testResource>
-        </testResources>
-        <plugins>
-            <plugin>
-                <groupId>org.codehaus.groovy</groupId>
-                <artifactId>groovy-eclipse-compiler</artifactId>
-                <version>${groovy-eclipse-compiler.version}</version>
-                <extensions>true</extensions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <compilerId>groovy-eclipse-compiler</compilerId>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-compiler</artifactId>
-                        <version>${groovy-eclipse-compiler.version}</version>
-                    </dependency>
-                    <!-- for 2.8.0-01 and later you must have an explicit dependency on groovy-eclipse-batch -->
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-eclipse-batch</artifactId>
-                        <version>2.5.8-02</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
-        </plugins>
-    </build>
-</project>
+        <dependency>
+            <groupId>org.jenkins-ci.main</groupId>
+            <artifactId>jenkins-core</artifactId>
+            <version>2.164.3</version>
+        </dependency>
 ```
+
+如果需要JSONObject类型的话，需要添加如下依赖：
+
+```conf
+        <dependency>
+            <groupId>org.kohsuke.stapler</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4-jenkins-2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.25</version>
+            <scope>compile</scope>
+        </dependency>
+```
+
+## 测试基类
+
+在测试类的定义中可以选择BasePipelineTest或DeclarativePipelineTest进行继承，区别是：
+
+BasePipelineTest测试的构建脚本：
+
+```conf
+node(){
+    .....
+}
+```
+
+DeclarativePipelineTest测试的构建脚本：
+
+```conf
+pipeline {
+    agent none
+    stages {
+        stage('Example Build') {
+            agent { docker 'maven:3-alpine' }
+            steps {
+                .....
+            }
+        }
+        stage('Example Test') {
+            agent { docker 'openjdk:8-jre' }
+            steps {
+                .....
+            }
+        }
+    }
+}
+```
+
+## 使用Pipeline Utility Steps定义的方法
+
+首先看看[Pipeline Utility Steps Plugin 源码](https://github.com/jenkinsci/pipeline-utility-steps-plugin)是怎么实现的，然后自己在测试类模拟，以readJSON方法为例：
+
+```java
+    @Test
+    void library_annotation() throws Exception {
+        boolean exception = false
+        def library = library().name('shared-library')
+                .defaultVersion("master")
+                .allowOverride(false)
+                .implicit(false)
+                .targetPath(sharedLibs)
+                .retriever(localSource(sharedLibs))
+                .build()
+        helper.registerSharedLibrary(library)
+        helper.registerAllowedMethod(MethodSignature.method("readJSON",String.class),{file->
+        return this.readJSON((String)file)
+        })
+        runScript('com/bluersw/LibHelper.Jenkinsfile')
+        printCallStack()
+    }
+
+    public JSONObject readJSON(String path){
+        FileInputStream fs = new FileInputStream(path);
+        String text = fs.getText();
+        JSONObject jo = (JSONObject)JSONSerializer.toJSON(text);
+        return jo;
+    }
+```
+
+## 使用@NonCPS
+
+一些数据类型无法串行化，使用的时候Jenkins会报错（Jenkins构建可以暂停和继续需要串行化所有数据），可以使用@NonCPS注解避免报错，同样暂停和继续可能也不能使用了：
+
+```java
+@NonCPS
+static List<Integer> nonCpsDouble(List<Integer> integers) {
+    integers.collect { it * 2 }
+}
+```
+
+## 更多资料
+
+[JenkinsPipelineUnit使用说明](https://github.com/jenkinsci/JenkinsPipelineUnit)
 
 [示例项目 Global Shared Library Frame](https://github.com/sunweisheng/global-shared-library-frame)
