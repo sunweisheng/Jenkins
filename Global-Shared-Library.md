@@ -275,4 +275,4 @@ static List<Integer> nonCpsDouble(List<Integer> integers) {
 
 [JenkinsPipelineUnit使用说明](https://github.com/jenkinsci/JenkinsPipelineUnit)
 
-[示例项目 Global Shared Library Frame](https://github.com/sunweisheng/global-shared-library-frame)
+[示例项目 Jenkins Shared Libraries](https://github.com/sunweisheng/jenkins-shared-libraries)
