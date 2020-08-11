@@ -151,6 +151,12 @@ package: io.jenkins.pipeline.sample
             <artifactId>jenkins-core</artifactId>
             <version>2.164.3</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
 ```
 
 如果需要JSONObject类型的话，需要添加如下依赖：
