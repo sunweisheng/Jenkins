@@ -72,7 +72,7 @@ package: io.jenkins.pipeline.sample
 
 ![Alt text](http://static.bluersw.com/images/Jenkins/global-shared-library-01.png)
 
-打开项目后将pipelineUsingSharedLib.groovy改名为pipelineUsingSharedLib.Jenkinsfile，TestSharedLibrary测试类里runScript()中的地址也要改一下，红色的错误提示就没了，之后可以把各个文件夹中的目录名（包名）改成你希望的目录名（包名）。
+打开项目后可以把各个文件夹中的目录名（包名）改成你希望的目录名（包名）。
 
 ## 修改POM
 
