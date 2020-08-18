@@ -1,4 +1,4 @@
-# 安装Nodejs
+# 安装 Nodejs
 
 下载合适的版本（[下载地址](https://nodejs.org/en/download/)）
 
