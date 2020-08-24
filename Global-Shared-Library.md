@@ -72,7 +72,7 @@ package: io.jenkins.pipeline.sample
 
 ![Alt text](http://static.bluersw.com/images/Jenkins/global-shared-library-01.png)
 
-打开项目后将pipelineUsingSharedLib.groovy改名为pipelineUsingSharedLib.Jenkinsfile，TestSharedLibrary测试类里runScript()中的地址也要改一下，红色的错误提示就没了，之后可以把各个文件夹中的目录名（包名）改成你希望的目录名（包名）。
+打开项目后可以把各个文件夹中的目录名（包名）改成你希望的目录名（包名）。
 
 ## 修改POM
 
@@ -150,6 +150,12 @@ package: io.jenkins.pipeline.sample
             <groupId>org.jenkins-ci.main</groupId>
             <artifactId>jenkins-core</artifactId>
             <version>2.164.3</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
         </dependency>
 ```
 
@@ -236,7 +242,7 @@ pipeline {
 
 ## 使用@NonCPS
 
-一些数据类型无法串行化，使用的时候Jenkins会报错（Jenkins构建可以暂停和继续需要串行化所有数据），可以使用@NonCPS注解避免报错，同样暂停和继续可能也不能使用了：
+在使用Scripted Pipeline句法时如果数据类型无法串行化，使用的时候Jenkins会报错（Jenkins构建可以暂停和继续需要串行化所有数据），可以使用@NonCPS注解避免报错，同样暂停和继续可能也不能使用了：
 
 ```java
 @NonCPS
@@ -245,8 +251,34 @@ static List<Integer> nonCpsDouble(List<Integer> integers) {
 }
 ```
 
+## IntelliJ IDEA GDSL
+
+在编写Scripted Pipeline句法时，IDE是没有对应方法的智能提示的，比如：
+
+![Alt text](http://static.bluersw.com/images/Jenkins/global-shared-library-02.png)
+
+可以打开任意一个Jenkins构建任务，在左侧菜单选择流水线语法后再选择IntelliJ IDEA GDSL，将页面输出内容保存为.gdsl文件:
+
+![Alt text](http://static.bluersw.com/images/Jenkins/global-shared-library-03.png)
+
+.gdsl文件存放在项目源码目录下（比如:scr/main/groovy），打开在界面中点击激活(Activate back):
+
+![Alt text](http://static.bluersw.com/images/Jenkins/global-shared-library-05.png)
+
+之后就可以智能提示Scripted Pipeline句法了：
+
+![Alt text](http://static.bluersw.com/images/Jenkins/global-shared-library-04.png)
+
+此方法在Declarative Pipeline句法中不好使。
+
+简单的说：Declarative就是pipeline{}块，Scripted就是node{}，注意，script{}块的内容是Scripted句法，只不过在是在Declarative句法中声明。
+
+[句法说明](https://www.jenkins.io/doc/book/pipeline/syntax/)
+
 ## 更多资料
+
+[Declarative Pipeline和Scripted Pipeline句法说明](https://www.jenkins.io/doc/book/pipeline/)
 
 [JenkinsPipelineUnit使用说明](https://github.com/jenkinsci/JenkinsPipelineUnit)
 
-[示例项目 Global Shared Library Frame](https://github.com/sunweisheng/global-shared-library-frame)
+[示例项目 Jenkins Shared Libraries](https://github.com/sunweisheng/jenkins-shared-libraries)
