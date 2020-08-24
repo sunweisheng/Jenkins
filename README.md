@@ -11,8 +11,5 @@
 * [Jenkins插件开发](Plug-in-Dev.md)
 * [安装SonarQube 8.3版本](Install-SonarQube-8.3.md)
 * [创建Global Shared Library项目](Global-Shared-Library.md)
-<<<<<<< HEAD
-* [Jenkins Json Build 项目](https://github.com/sunweisheng/jenkins-json-build)
-=======
 * [安装Nodejs](Install-Nodejs.md)
->>>>>>> 370415939a7f6abcac6efdc356456bd8a16d6d4f
+* [Jenkins Json Build 项目](https://github.com/sunweisheng/jenkins-json-build)
